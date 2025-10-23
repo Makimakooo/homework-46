@@ -1,0 +1,26 @@
+[
+  { 
+    "id": 1, 
+    "title": "Стильный Рюкзак", 
+    "price": 45.99, 
+    "image": "https://dobramama.com.ua/image/cache/catalog/easyphoto/9379/stilnyy-povsednevnyy-zhenskiy-ryukzak-gorodskoy-stil-modnyy-molodezhnyy-ryukzak-dlya-devushek-trend-2024,15-1200x1620.jpg" 
+  },
+  { 
+    "id": 2, 
+    "title": "Беспроводные Наушники", 
+    "price": 99.50, 
+    "image": "https://beoplay.com.ua/wp-content/uploads/2025/06/Beoplay-Eleven_6_Case_Full-3-dawn-purple.png" 
+  },
+  { 
+    "id": 3, 
+    "title": "Механическая Клавиатура", 
+    "price": 120.00, 
+    "image": "https://cdn.comfy.ua/media/catalog/product/cache/5/image/600x/9df78eab33525d08d6e5fb8d27136e95/a/9/a92a028f9a5a17a025_001.jpg" 
+  },
+  { 
+    "id": 4, 
+    "title": "Коврик для Мыши XXL", 
+    "price": 15.00, 
+    "image": "https://img.joomcdn.net/d1b5c5cf926ed08f43f5956a7c3d7848a9b0809c_original.jpeg" 
+}
+]
