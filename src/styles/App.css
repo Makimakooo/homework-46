@@ -2,17 +2,17 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f0f8ff; /* светлый фон */
+  background: #f0f8ff; 
   color: #333;
 }
 
-/* ================== HEADER ================== */
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #ff6f61; /* яркий коралловый */
+  background: #ff6f61; 
   color: #fff;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
@@ -25,14 +25,13 @@ header a {
   font-weight: bold;
 }
 
-/* ================== PRODUCT LIST (HOME) ================== */
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   padding: 2rem;
   justify-content: center;
-  /* 💡 ДОБАВЛЕНИЕ: Центрируем блок со списком товаров */
   max-width: 1200px; 
   margin: 20px auto; 
 }
@@ -46,7 +45,7 @@ header a {
   background: #fff;
   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  /* 💡 ДОБАВЛЕНИЕ: Используем Flexbox для выравнивания содержимого */
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -57,10 +56,10 @@ header a {
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Стили для изображения в карточке товара */
+
 .product-card img {
   width: 100%;
-  height: 150px; /* Фиксированная высота */
+  height: 150px; 
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -72,9 +71,9 @@ header a {
     margin-bottom: 15px;
 }
 
-/* ================== ОБЩИЕ КНОПКИ (переопределяем стили из index.css) ================== */
+
 .product-card button, 
-.cart-total button { /* Применяется к кнопкам в карточке и итоговой сумме */
+.cart-total button {
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
   cursor: pointer;
@@ -86,18 +85,17 @@ header a {
   transition: background 0.2s, transform 0.2s;
 }
 
+
 .product-card button:hover,
 .cart-total button:hover {
   background-color: #ff6f20;
   transform: scale(1.05);
 }
 
-/* ================== CART PAGE ================== */
 
-/* 💡 НОВЫЙ КОНТЕЙНЕР ДЛЯ СТРАНИЦЫ КОРЗИНЫ */
 .cart-container {
     max-width: 850px;
-    margin: 30px auto; /* Центрируем корзину */
+    margin: 30px auto; 
     padding: 20px 40px;
     background: #fff; 
     border-radius: 12px;
@@ -122,7 +120,7 @@ header a {
     flex-grow: 1; 
 }
 
-/* Изображение в корзине */
+
 .cart-item-info img {
     width: 70px;
     height: 70px;
@@ -137,7 +135,7 @@ header a {
     gap: 10px; 
 }
 
-/* Стили для кнопок +/- в корзине */
+
 .item-controls button {
     padding: 5px 10px;
     margin: 0; 
@@ -165,34 +163,34 @@ header a {
 
 .cart-container {
     max-width: 850px;
-    margin: 30px auto; /* Центрируем корзину */
+    margin: 30px auto; 
     padding: 20px 40px;
     background: #fff; 
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 💡 Стиль для каждой отдельной позиции в корзине */
+
 .cart-item {
     border-bottom: 1px solid #ddd;
     padding: 1rem 0;
     display: flex;
-    justify-content: space-between; /* Распределяем элементы по ширине */
+    justify-content: space-between; 
     align-items: center;
 }
 
 .cart-item:last-child {
-    border-bottom: none; /* Убираем нижнюю линию у последнего элемента */
+    border-bottom: none; 
 }
 
-/* 💡 Контейнер для изображения и названия товара */
+
 .cart-item-info {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Позволяем ему занять большую часть пространства */
+    flex-grow: 1; 
 }
 
-/* Изображение в корзине */
+
 .cart-item-info img {
     width: 70px;
     height: 70px;
@@ -201,14 +199,14 @@ header a {
     border-radius: 4px;
 }
 
-/* 💡 Контролы количества (+ / -) */
+
 .item-controls {
     display: flex;
     align-items: center;
-    gap: 10px; /* Отступ между кнопками */
+    gap: 10px; 
 }
 
-/* Переопределяем стили кнопок +/- для корзины, чтобы они были меньше */
+
 .item-controls button {
     padding: 5px 10px;
     margin: 0; 
@@ -216,24 +214,23 @@ header a {
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;
-    /* Убираем hover-эффект, наследуемый от общих кнопок */
+    
 }
 
-/* 💡 Сумма за одну позицию */
+
 .item-subtotal {
     font-weight: bold;
-    min-width: 80px; /* Фиксируем ширину для выравнивания */
+    min-width: 80px; 
     text-align: right;
     color: #555;
 }
 
-/* 💡 Итоговая сумма корзины */
 .cart-total {
     text-align: right;
     font-size: 1.6em;
     padding-top: 20px;
     margin-top: 20px;
-    border-top: 2px solid #ff6f61; /* Толстая разделительная линия */
+    border-top: 2px solid #ff6f61; 
     font-weight: bold;
     color: #333;
 }

@@ -1,5 +1,4 @@
 :root {
-  /* ... Ваши переменные */
   font-family: system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -36,7 +35,7 @@ h1 {
 
 button {
  border-radius: 8px;
- border: 1px solid transparent; /* Это граница, которую вы задали изначально */
+ border: 1px solid transparent; 
  padding: 0.6em 1.2em;
  font-size: 1em;
  font-weight: 500;
@@ -46,13 +45,13 @@ button {
  transition: border-color 0.25s;
 }
 button:hover {
- border-color: #646cff; /* Изменение цвета этой границы при наведении */
+ border-color: #646cff; 
 }
 button:focus,
 button:focus-visible {
- outline: none; /* 💡 Убирает контур, создаваемый браузером/системой */
+ outline: none; 
 
- border-color: transparent; /* 💡 Убедимся, что hover-эффект не остается */
+ border-color: transparent; 
 }
 
 @media (prefers-color-scheme: light) {
