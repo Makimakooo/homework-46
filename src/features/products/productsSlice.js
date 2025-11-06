@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Используем большое число для гарантированной уникальности новых ID
 let nextId = 1000;
 
 export const fetchProducts = createAsyncThunk(
@@ -20,22 +19,32 @@ const productsSlice = createSlice({
     error: null,
   },
   reducers: {
-    // 💡 ФУНКЦИОНАЛ ДОБАВЛЕНИЯ ТОВАРА
+    // ➕ Добавить новый товар
     addProduct: (state) => {
       const newProduct = {
-        id: nextId++, // Уникальный ID
+        id: nextId++,
         title: `Новый Товар #${nextId - 1000}`,
         price: 99.0,
         image: `https://placehold.co/150x150?text=NEW+ITEM`,
       };
-      state.items.unshift(newProduct); 
+      state.items.unshift(newProduct);
     },
-    
+
+    // ❌ Удалить товар
     removeProduct: (state, action) => {
-      
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
+
+    // ✏️ Обновить (редактировать) товар
+    updateProduct: (state, action) => {
+      const updated = action.payload;
+      const index = state.items.findIndex((item) => item.id === updated.id);
+      if (index !== -1) {
+        state.items[index] = updated;
+      }
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -57,5 +66,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct } = productsSlice.actions;
+export const { addProduct, removeProduct, updateProduct } = productsSlice.actions;
 export default productsSlice.reducer;

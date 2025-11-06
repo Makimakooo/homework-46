@@ -1,0 +1,97 @@
+
+
+.edit-button:hover { 
+  color: #000;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.edit-icon {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  background: transparent !important;
+  border: none !important;
+  color: #ff6f61 !important;
+  font-size: 1em !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.save-btn {
+  background-color: #9b4949;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* 
+.delete-button {
+  position: absolute;
+  top: 5px;
+  background: transparent !important;
+  border: none !important;
+  color: #ff6f61 !important;
+  font-size: 1.5em !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10;
+} */
+
+
+
+.edit-icon:hover,
+.delete-button:hover {
+  color: #cc0000 !important;
+  transform: scale(1.1);
+}
