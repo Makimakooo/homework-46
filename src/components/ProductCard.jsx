@@ -7,7 +7,7 @@ import {
 } from "../features/products/productsSlice";
 import "./ProductCard.css";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, user }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState({ ...product });
@@ -15,64 +15,59 @@ export default function ProductCard({ product }) {
   if (!product) return null;
 
   const handleDelete = () => {
-    if (window.confirm(`Ви впевнені, що хочете видалити "${product.title}"?`)) {
-      dispatch(removeProduct(product.id));
+    if (window.confirm(`Видалити "${product.title}"?`)) {
+      dispatch(removeProduct(product._id)); // 👈 Mongo _id
     }
   };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProduct(editedProduct));
+    dispatch(updateProduct(editedProduct)); // 👈 відправляємо весь продукт
     setIsEditing(false);
   };
 
   return (
     <div className="product-card">
-      {/* кнопка удаления */}
-      <button
-        onClick={handleDelete}
-        className="delete-button"
-        title={`Видалити ${product.title}`}
-      >
-        &times;
-      </button>
 
-      {/* кнопка редактирования */}
-      <button
-        onClick={() => setIsEditing(true)}
-        className="edit-icon"
-        title={`Редагувати ${product.title}`}
-      >
-        ✎
-      </button>
+      {/* Видалення – тільки admin */}
+      {user?.role === "admin" && (
+        <button className="delete-button" onClick={handleDelete}>
+          &times;
+        </button>
+      )}
+
+      {/* Редагування – тільки admin */}
+      {user?.role === "admin" && (
+        <button className="edit-icon" onClick={() => setIsEditing(true)}>
+          ✎
+        </button>
+      )}
 
       <img src={product.image} alt={product.title} className="product-image" />
 
       <div className="product-info">
         <h3>{product.title}</h3>
-        <p className="product-price">${product.price.toFixed(2)}</p>
+        <p className="product-price">${product.price}</p>
 
         <button onClick={() => dispatch(addToCart(product))}>
           Додати в кошик
         </button>
       </div>
 
-      {/* модалка редактирования */}
-      {isEditing && (
+      {/* Модалка редагування */}
+      {isEditing && user?.role === "admin" && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>Редагування товару</h2>
+            <h2>Редагувати товар</h2>
             <form onSubmit={handleEditSubmit} className="edit-form">
+              
               <label>
                 Назва:
                 <input
                   type="text"
                   value={editedProduct.title}
                   onChange={(e) =>
-                    setEditedProduct({
-                      ...editedProduct,
-                      title: e.target.value,
-                    })
+                    setEditedProduct({ ...editedProduct, title: e.target.value })
                   }
                 />
               </label>
@@ -85,7 +80,7 @@ export default function ProductCard({ product }) {
                   onChange={(e) =>
                     setEditedProduct({
                       ...editedProduct,
-                      price: parseFloat(e.target.value),
+                      price: Number(e.target.value),
                     })
                   }
                 />
@@ -106,14 +101,8 @@ export default function ProductCard({ product }) {
               </label>
 
               <div className="modal-buttons">
-                <button type="submit" className="save-btn">
-                  Зберегти
-                </button>
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setIsEditing(false)}
-                >
+                <button className="save-btn" type="submit">Зберегти</button>
+                <button className="cancel-btn" type="button" onClick={() => setIsEditing(false)}>
                   Скасувати
                 </button>
               </div>

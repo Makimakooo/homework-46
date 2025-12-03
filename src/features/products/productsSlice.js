@@ -1,13 +1,58 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-let nextId = 1000;
+const API_URL = "http://localhost:5000/api/products";
 
+// ===== GET ALL PRODUCTS =====
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await axios.get("/products.json");
-    return response.data;
+    const res = await axios.get(API_URL);
+    return res.data;
+  }
+);
+
+// ===== ADD PRODUCT =====
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (newProduct, { getState }) => {
+    const token = getState().auth.token;
+
+    const res = await axios.post(API_URL, newProduct, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data.product;
+  }
+);
+
+// ===== DELETE PRODUCT =====
+export const removeProduct = createAsyncThunk(
+  "products/removeProduct",
+  async (id, { getState }) => {
+    const token = getState().auth.token;
+
+    await axios.delete(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return id;
+  }
+);
+
+// ===== UPDATE PRODUCT =====
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async (product, { getState }) => {
+    const token = getState().auth.token;
+
+    const res = await axios.put(`${API_URL}/${product._id}`, product, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return res.data.updated;
   }
 );
 
@@ -18,33 +63,7 @@ const productsSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {
-    // ➕ Добавить новый товар
-    addProduct: (state) => {
-      const newProduct = {
-        id: nextId++,
-        title: `Новый Товар #${nextId - 1000}`,
-        price: 99.0,
-        image: `https://placehold.co/150x150?text=NEW+ITEM`,
-      };
-      state.items.unshift(newProduct);
-    },
-
-    // ❌ Удалить товар
-    removeProduct: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
-
-    // ✏️ Обновить (редактировать) товар
-    updateProduct: (state, action) => {
-      const updated = action.payload;
-      const index = state.items.findIndex((item) => item.id === updated.id);
-      if (index !== -1) {
-        state.items[index] = updated;
-      }
-    },
-  },
-
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -52,19 +71,29 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        const maxId = action.payload.reduce(
-          (max, item) => Math.max(max, item.id),
-          0
-        );
-        nextId = Math.max(nextId, maxId + 1);
         state.items = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.items.unshift(action.payload);
+      })
+
+      .addCase(removeProduct.fulfilled, (state, action) => {
+        state.items = state.items.filter((p) => p._id !== action.payload);
+      })
+
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const updated = action.payload;
+        const i = state.items.findIndex((p) => p._id === updated._id);
+        if (i !== -1) state.items[i] = updated;
       });
   },
 });
 
-export const { addProduct, removeProduct, updateProduct } = productsSlice.actions;
+
 export default productsSlice.reducer;
+
